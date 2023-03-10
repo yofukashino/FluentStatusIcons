@@ -1,26 +1,28 @@
-import { Injector, Logger, webpack } from "replugged";
+import { Injector, Logger, settings } from "replugged";
 
-const inject = new Injector();
-const logger = Logger.plugin("PluginTemplate");
+import { defaultSettings } from "./lib/consts";
 
-export async function start(): Promise<void> {
-  const typingMod = await webpack.waitForModule<{
-    startTyping: (channelId: string) => void;
-  }>(webpack.filters.byProps("startTyping"));
-  const getChannelMod = await webpack.waitForModule<{
-    getChannel: (id: string) => {
-      name: string;
-    };
-  }>(webpack.filters.byProps("getChannel"));
+export const PluginLogger = Logger.plugin("FluentStatusIcons");
 
-  if (typingMod && getChannelMod) {
-    inject.instead(typingMod, "startTyping", ([channel]) => {
-      const channelObj = getChannelMod.getChannel(channel);
-      logger.log(`Typing prevented! Channel: #${channelObj?.name ?? "unknown"} (${channel}).`);
-    });
-  }
-}
+export const SettingValues = await settings.init("Tharki.FluentStatusIcons", defaultSettings);
 
-export function stop(): void {
-  inject.uninjectAll();
-}
+export const PluginInjector = new Injector();
+
+import { registerSettings } from "./Components/Settings";
+
+import { applyInjections } from "./patches/index";
+
+import * as Utils from "./lib/utils";
+
+export const start = (): void => {
+  registerSettings();
+  applyInjections();
+  Utils.refreshMaskLibrary();
+};
+
+export const stop = (): void => {
+  PluginInjector.uninjectAll();
+  Utils.refreshMaskLibrary();
+};
+export { patchDirectMessageStatus } from "./patches/index";
+export { Settings } from "./Components/Settings";
