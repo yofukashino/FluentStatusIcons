@@ -4,7 +4,7 @@ import { defaultSettings } from "./lib/consts";
 
 export const PluginLogger = Logger.plugin("FluentStatusIcons");
 
-export const SettingValues = await settings.init("Tharki.FluentStatusIcons", defaultSettings);
+export const SettingValues = await settings.init("dev.tharki.FluentStatusIcons", defaultSettings);
 
 export const PluginInjector = new Injector();
 

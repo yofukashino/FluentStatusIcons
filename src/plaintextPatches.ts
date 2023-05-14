@@ -5,7 +5,7 @@ export default [
     replacements: [
       {
         match: /(\.isMobile.*\.color.*(\w+)\.style.*\("svg".*\n.*children:)(\[.*\)\])/gm,
-        replace: `$1replugged.plugins.getExports('Tharki.FluentStatusIcons').patchDirectMessageStatus($2, $3)`,
+        replace: `$1replugged.plugins.getExports('dev.tharki.FluentStatusIcons').patchDirectMessageStatus($2, $3)`,
       },
     ],
   },
