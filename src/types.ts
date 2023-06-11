@@ -2,9 +2,7 @@ export { types as DefaultTypes } from "replugged";
 import { types as DefaultTypes } from "replugged";
 export { ReactElement, ElementType } from "react";
 import { ComponentClass } from "react";
-export interface GenericModule {
-  [key: string]: DefaultTypes.AnyFunction;
-}
+export interface GenericModule extends Record<string, DefaultTypes.AnyFunction> {}
 export interface Avatar {
   default: ComponentClass;
   AnimatedAvatar: {
