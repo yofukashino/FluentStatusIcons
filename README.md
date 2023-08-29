@@ -2,7 +2,7 @@
 
 Fluent presence icons, designed by Microsoft.
 
-For other fluent icons, install [this theme by Stickfab](https://github.com/stickfab/pc-fluenticons).
+For other fluent icons, install [this theme by Stickfab](https://github.com/zuzumi-f/pc-fluenticons).
 
 Direct Download Link: [dev.tharki.FluentStatusIcons.asar](https://github.com/Tharki-God/FluentStatusIcons/releases/latest/download/dev.tharki.FluentStatusIcons.asar)
 
