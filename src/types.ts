@@ -4,7 +4,7 @@ export { ReactElement, ElementType } from "react";
 import { ComponentClass } from "react";
 export interface GenericModule extends Record<string, DefaultTypes.AnyFunction> {}
 export interface Avatar {
-  default: ComponentClass;
+  Avatar: ComponentClass;
   AnimatedAvatar: {
     $$typeof: symbol;
     compare: null | DefaultTypes.AnyFunction;
@@ -14,12 +14,12 @@ export interface Avatar {
 
 export interface MaskLibrary {
   default: ComponentClass;
-  MaskType: {
+  MaskLibrary: {
     $$typeof: symbol;
     compare: null | DefaultTypes.AnyFunction;
     type: DefaultTypes.AnyFunction;
   };
-  MaskClasses: {
+  MaskIDs: {
     AUTOCOMPLETE_EMOJI_UPSELL_EMOJI: string;
     AVATAR_CALL_ICON: string;
     AVATAR_CALL_ICON_32: string;

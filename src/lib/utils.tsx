@@ -1,22 +1,19 @@
-import { common } from "replugged";
+import { ReactDOM } from "replugged/common";
 import { PluginLogger } from "../index";
-import { MaskLibrary } from "./requiredModules";
-import * as Types from "../types";
-
-const { ReactDOM } = common;
+import { MaskManager } from "./requiredModules";
 
 export const refreshMaskLibrary = (): void => {
   try {
-    if (!MaskLibrary) {
+    if (MaskManager) {
       PluginLogger.error("Missing “MaskLibrary” module, Please report this to the developer.");
       return;
     }
-    const { MaskType } = MaskLibrary as unknown as { MaskType: Types.ElementType };
+    const { MaskLibrary } = MaskManager;
     const TempMaskContainer = document.createElement("div");
     TempMaskContainer.style.display = "none";
     document.body.appendChild(TempMaskContainer);
 
-    ReactDOM.render(<MaskType />, TempMaskContainer);
+    ReactDOM.render(<MaskLibrary />, TempMaskContainer);
 
     const MaskLibraryElement = document.querySelector("#app-mount #svg-mask-squircle")
       ?.parentNode as HTMLElement;

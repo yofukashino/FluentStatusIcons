@@ -1,9 +1,9 @@
 import { PluginInjector, SettingValues } from "../index";
-import { MaskLibrary } from "../lib/requiredModules";
+import { MaskManager } from "../lib/requiredModules";
 import * as FluentMasks from "../Components/FluentMasks";
 import * as Types from "../types";
 export const patchMaskLibrary = (): void => {
-  PluginInjector.after(MaskLibrary.MaskType, "type", (_args, res: Types.ReactElement) => {
+  PluginInjector.after(MaskManager.MaskLibrary, "type", (_args, res: Types.ReactElement) => {
     const masks = res.props.children;
     const OnlineStatusMask = masks.findIndex(
       (mask: Types.ReactElement) => mask.props.id === "svg-mask-status-online",
