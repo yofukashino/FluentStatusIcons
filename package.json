@@ -1,6 +1,6 @@
 {
   "name": "fluent-status-icons",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Fluent presence icons, designed by Microsoft.",
   "engines": {
     "node": ">=14.0.0"
