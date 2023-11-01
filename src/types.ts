@@ -18,7 +18,7 @@ export interface MaskLibrary {
     $$typeof: symbol;
     compare: null | DefaultTypes.AnyFunction;
     type: DefaultTypes.AnyFunction;
-  };
+  } & ComponentClass;
   MaskIDs: {
     AUTOCOMPLETE_EMOJI_UPSELL_EMOJI: string;
     AVATAR_CALL_ICON: string;

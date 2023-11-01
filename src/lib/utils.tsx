@@ -4,8 +4,8 @@ import { MaskManager } from "./requiredModules";
 
 export const refreshMaskLibrary = (): void => {
   try {
-    if (MaskManager) {
-      PluginLogger.error("Missing “MaskLibrary” module, Please report this to the developer.");
+    if (!MaskManager) {
+      PluginLogger.error("Missing “MaskManager” module, Please report this to the developer.");
       return;
     }
     const { MaskLibrary } = MaskManager;
