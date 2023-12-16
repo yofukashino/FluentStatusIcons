@@ -116,3 +116,5 @@ export interface Settings {
   IdleIcon: boolean;
   OfflineIcon: boolean;
 }
+
+export * as default from "./types";

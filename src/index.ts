@@ -12,7 +12,7 @@ import { registerSettings } from "./Components/Settings";
 
 import { applyInjections } from "./patches/index";
 
-import * as Utils from "./lib/utils";
+import Utils from "./lib/utils";
 
 export const start = (): void => {
   registerSettings();
@@ -24,5 +24,5 @@ export const stop = (): void => {
   PluginInjector.uninjectAll();
   Utils.refreshMaskLibrary();
 };
-export { patchDirectMessageStatus } from "./patches/index";
+
 export { Settings } from "./Components/Settings";

@@ -25,3 +25,5 @@ export const refreshMaskLibrary = (): void => {
     PluginLogger.error(error);
   }
 };
+
+export default { refreshMaskLibrary };

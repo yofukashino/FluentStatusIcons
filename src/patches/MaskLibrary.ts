@@ -1,7 +1,7 @@
 import { PluginInjector, SettingValues } from "../index";
 import { MaskManager } from "../lib/requiredModules";
-import * as FluentMasks from "../Components/FluentMasks";
-import * as Types from "../types";
+import FluentMasks from "../Components/FluentMasks";
+import Types from "../types";
 export const patchMaskLibrary = (): void => {
   PluginInjector.after(MaskManager.MaskLibrary, "type", (_args, res: Types.ReactElement) => {
     const masks = res.props.children;
