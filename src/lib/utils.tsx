@@ -1,14 +1,16 @@
 import { ReactDOM } from "replugged/common";
 import { PluginLogger } from "../index";
-import { MaskManager } from "./requiredModules";
+import Modules from "./requiredModules";
 
 export const refreshMaskLibrary = (): void => {
   try {
-    if (!MaskManager) {
+    if (!Modules?.MaskManager) {
       PluginLogger.error("Missing “MaskManager” module, Please report this to the developer.");
       return;
     }
-    const { MaskLibrary } = MaskManager;
+    const {
+      MaskManager: { MaskLibrary },
+    } = Modules;
     const TempMaskContainer = document.createElement("div");
     TempMaskContainer.style.display = "none";
     document.body.appendChild(TempMaskContainer);

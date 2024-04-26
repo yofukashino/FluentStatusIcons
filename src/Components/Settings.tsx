@@ -3,6 +3,7 @@ import { SwitchItem } from "replugged/components";
 import { PluginLogger, SettingValues } from "../index";
 import { defaultSettings } from "../lib/consts";
 import Types from "../types";
+
 export const registerSettings = (): void => {
   for (const key in defaultSettings) {
     if (SettingValues.has(key as keyof Types.Settings)) return;
@@ -47,3 +48,5 @@ export const Settings = () => {
     </div>
   );
 };
+
+export default { registerSettings, Settings };

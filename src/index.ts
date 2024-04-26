@@ -1,28 +1,18 @@
 import { Injector, Logger, settings } from "replugged";
-
 import { defaultSettings } from "./lib/consts";
-
 export const PluginLogger = Logger.plugin("FluentStatusIcons");
-
 export const SettingValues = await settings.init("dev.tharki.FluentStatusIcons", defaultSettings);
-
 export const PluginInjector = new Injector();
-
-import { registerSettings } from "./Components/Settings";
-
-import { applyInjections } from "./patches/index";
-
-import Utils from "./lib/utils";
+import Settings from "./Components/Settings";
+import Injections from "./injections/index";
 
 export const start = (): void => {
-  registerSettings();
-  applyInjections();
-  Utils.refreshMaskLibrary();
+  Settings.registerSettings();
+  void Injections.applyInjections();
 };
 
 export const stop = (): void => {
-  PluginInjector.uninjectAll();
-  Utils.refreshMaskLibrary();
+  Injections.removeInjections();
 };
 
 export { Settings } from "./Components/Settings";
