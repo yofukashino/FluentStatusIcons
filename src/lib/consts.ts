@@ -5,4 +5,5 @@ export const defaultSettings = {
   DNDIcon: true,
   IdleIcon: true,
   OfflineIcon: true,
+  TypingIcon: true,
 };

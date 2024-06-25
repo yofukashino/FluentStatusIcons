@@ -10,6 +10,7 @@ export namespace Types {
       compare: null | DefaultTypes.AnyFunction;
       type: DefaultTypes.AnyFunction;
     };
+    getStatusCoords: DefaultTypes.AnyFunction;
   }
 
   export interface MaskLibrary {
@@ -105,7 +106,9 @@ export namespace Types {
   }
   export interface Modules {
     loadModules?: () => Promise<void>;
+    AvatarModule?: GenericModule;
     Avatar?: Avatar;
+    MaskManagerModule?: GenericModule;
     MaskManager?: MaskLibrary;
   }
   export interface Settings {
@@ -115,6 +118,7 @@ export namespace Types {
     DNDIcon: boolean;
     IdleIcon: boolean;
     OfflineIcon: boolean;
+    TypingIcon: boolean;
   }
 }
 export default Types;

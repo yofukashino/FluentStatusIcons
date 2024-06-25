@@ -56,6 +56,14 @@ export default (): void => {
           <FluentMasks.stream id={Modules.MaskManager.MaskIDs.STATUS_STREAMING} />
         );
       }
+      if (SettingValues.get("TypingIcon", defaultSettings.TypingIcon)) {
+        const StreamingStatusMask = masks.findIndex(
+          (mask: React.ReactElement) => mask.props.id === Modules.MaskManager.MaskIDs.STATUS_TYPING,
+        );
+        masks[StreamingStatusMask] = (
+          <FluentMasks.typing id={Modules.MaskManager.MaskIDs.STATUS_TYPING} />
+        );
+      }
       return res;
     },
   );

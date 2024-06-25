@@ -45,6 +45,11 @@ export const Settings = () => {
         {...util.useSetting(SettingValues, "StreamingIcon", defaultSettings.StreamingIcon)}>
         Streaming Icon
       </SwitchItem>
+      <SwitchItem
+        note="Fluent Typing Icon"
+        {...util.useSetting(SettingValues, "TypingIcon", defaultSettings.TypingIcon)}>
+        Typing Icon
+      </SwitchItem>
     </div>
   );
 };

@@ -77,4 +77,15 @@ export const stream = ({
   </mask>
 );
 
-export default { online, phone, idle, dnd, offline, stream };
+export const typing = ({
+  children,
+  ...props
+}: React.SVGProps<SVGMaskElement> & { children?: React.ReactNode }): React.ReactElement => (
+  <mask maskContentUnits="objectBoundingBox" viewBox="0 0 1 1" style={props.style} {...props}>
+    <rect fill="white" cx="0" cy="0" width="1" height="1" ry="0.5" rx="0.2" />
+    <rect fill="black" width="0.95" height="0.9" ry="0.5" rx="0.2" x="0.025" y="0.06" />
+    {children}
+  </mask>
+);
+
+export default { online, phone, idle, dnd, offline, stream, typing };
