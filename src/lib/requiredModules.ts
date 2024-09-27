@@ -13,7 +13,7 @@ Modules.loadModules = async (): Promise<void> => {
     });
 
   Modules.Avatar ??= {
-    Avatar: webpack.getFunctionBySource(Modules.AvatarModule, ".AVATAR_DEFAULT;"),
+    Avatar: webpack.getFunctionBySource(Modules.AvatarModule, "dotRadius:"),
     AnimatedAvatar: webpack.getExportsForProps(Modules.AvatarModule, ["compare", "type"]),
     getStatusCoords: webpack.getFunctionBySource(Modules.AvatarModule, ".offset;"),
   };

@@ -1,3 +1,4 @@
+import { ErrorBoundary } from "replugged/components";
 import { PluginInjector } from "../index";
 import Modules from "../lib/requiredModules";
 export default (): void => {
@@ -6,6 +7,8 @@ export default (): void => {
   } = Modules;
   // thanks powercord for this code  => https://github.com/powercord-org/powercord/blob/v2/src/Powercord/coremods/utility-classes/modules/avatars.js
   PluginInjector.instead(AnimatedAvatar, "type", (args) => (
-    <Avatar {...Object.assign({}, ...args)} />
+    <ErrorBoundary>
+      <Avatar {...Object.assign({}, ...args)} />
+    </ErrorBoundary>
   ));
 };

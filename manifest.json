@@ -3,11 +3,11 @@
   "name": "FluentStatusIcons",
   "description": "Fluent presence icons, designed by Microsoft.",
   "image": "https://i.imgur.com/8I17Thq.png",
-  "source": "https://github.com/YofukashiNo/FluentStatusIcons",
+  "source": "https://github.com/yofukashino/FluentStatusIcons",
   "author": {
     "name": "Nanakusa",
     "discordID": "1121961711080050780",
-    "github": "YofukashiNo"
+    "github": "yofukashino"
   },
   "version": "1.0.5",
   "updater": {
