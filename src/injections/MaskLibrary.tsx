@@ -1,69 +1,54 @@
 import { PluginInjector, SettingValues } from "../index";
 import { defaultSettings } from "../lib/consts";
 import Modules from "../lib/requiredModules";
+import Utils from "../lib/utils";
 import FluentMasks from "../Components/FluentMasks";
 
 export default (): void => {
+  const replacements = [
+    {
+      predicate: SettingValues.get("OnlineIcon", defaultSettings.OnlineIcon),
+      id: Modules.MaskManager.MaskIDs.STATUS_ONLINE,
+      element: <FluentMasks.online id={Modules.MaskManager.MaskIDs.STATUS_ONLINE} />,
+    },
+    {
+      predicate: SettingValues.get("PhoneIcon", defaultSettings.PhoneIcon),
+      id: Modules.MaskManager.MaskIDs.STATUS_ONLINE_MOBILE,
+      element: <FluentMasks.phone id={Modules.MaskManager.MaskIDs.STATUS_ONLINE_MOBILE} />,
+    },
+    {
+      predicate: SettingValues.get("IdleIcon", defaultSettings.IdleIcon),
+      id: Modules.MaskManager.MaskIDs.STATUS_IDLE,
+      element: <FluentMasks.idle id={Modules.MaskManager.MaskIDs.STATUS_IDLE} />,
+    },
+    {
+      predicate: SettingValues.get("DNDIcon", defaultSettings.DNDIcon),
+      id: Modules.MaskManager.MaskIDs.STATUS_DND,
+      element: <FluentMasks.dnd id={Modules.MaskManager.MaskIDs.STATUS_DND} />,
+    },
+    {
+      predicate: SettingValues.get("OfflineIcon", defaultSettings.OfflineIcon),
+      id: Modules.MaskManager.MaskIDs.STATUS_OFFLINE,
+      element: <FluentMasks.offline id={Modules.MaskManager.MaskIDs.STATUS_OFFLINE} />,
+    },
+    {
+      predicate: SettingValues.get("StreamingIcon", defaultSettings.StreamingIcon),
+      id: Modules.MaskManager.MaskIDs.STATUS_STREAMING,
+      element: <FluentMasks.stream id={Modules.MaskManager.MaskIDs.STATUS_STREAMING} />,
+    },
+    {
+      predicate: SettingValues.get("TypingIcon", defaultSettings.TypingIcon),
+      id: Modules.MaskManager.MaskIDs.STATUS_TYPING,
+      element: <FluentMasks.typing id={Modules.MaskManager.MaskIDs.STATUS_TYPING} />,
+    },
+  ];
+
   PluginInjector.after(
     Modules.MaskManager.MaskLibrary,
     "type",
     (_args, res: React.ReactElement) => {
-      const masks = res.props.children;
-      if (SettingValues.get("OnlineIcon", defaultSettings.OnlineIcon)) {
-        const OnlineStatusMask = masks.findIndex(
-          (mask: React.ReactElement) => mask.props.id === Modules.MaskManager.MaskIDs.STATUS_ONLINE,
-        );
-        masks[OnlineStatusMask] = (
-          <FluentMasks.online id={Modules.MaskManager.MaskIDs.STATUS_ONLINE} />
-        );
-      }
-      if (SettingValues.get("PhoneIcon", defaultSettings.PhoneIcon)) {
-        const OnlineMobileStatusMask = masks.findIndex(
-          (mask: React.ReactElement) =>
-            mask.props.id === Modules.MaskManager.MaskIDs.STATUS_ONLINE_MOBILE,
-        );
-        masks[OnlineMobileStatusMask] = (
-          <FluentMasks.phone id={Modules.MaskManager.MaskIDs.STATUS_ONLINE_MOBILE} />
-        );
-      }
-      if (SettingValues.get("IdleIcon", defaultSettings.IdleIcon)) {
-        const IdleStatusMask = masks.findIndex(
-          (mask: React.ReactElement) => mask.props.id === Modules.MaskManager.MaskIDs.STATUS_IDLE,
-        );
-        masks[IdleStatusMask] = <FluentMasks.idle id={Modules.MaskManager.MaskIDs.STATUS_IDLE} />;
-      }
-      if (SettingValues.get("DNDIcon", defaultSettings.DNDIcon)) {
-        const DNDStatusMask = masks.findIndex(
-          (mask: React.ReactElement) => mask.props.id === Modules.MaskManager.MaskIDs.STATUS_DND,
-        );
-        masks[DNDStatusMask] = <FluentMasks.dnd id={Modules.MaskManager.MaskIDs.STATUS_DND} />;
-      }
-      if (SettingValues.get("OfflineIcon", defaultSettings.OfflineIcon)) {
-        const OfflineStatusMask = masks.findIndex(
-          (mask: React.ReactElement) =>
-            mask.props.id === Modules.MaskManager.MaskIDs.STATUS_OFFLINE,
-        );
-        masks[OfflineStatusMask] = (
-          <FluentMasks.offline id={Modules.MaskManager.MaskIDs.STATUS_OFFLINE} />
-        );
-      }
-      if (SettingValues.get("StreamingIcon", defaultSettings.StreamingIcon)) {
-        const StreamingStatusMask = masks.findIndex(
-          (mask: React.ReactElement) =>
-            mask.props.id === Modules.MaskManager.MaskIDs.STATUS_STREAMING,
-        );
-        masks[StreamingStatusMask] = (
-          <FluentMasks.stream id={Modules.MaskManager.MaskIDs.STATUS_STREAMING} />
-        );
-      }
-      if (SettingValues.get("TypingIcon", defaultSettings.TypingIcon)) {
-        const StreamingStatusMask = masks.findIndex(
-          (mask: React.ReactElement) => mask.props.id === Modules.MaskManager.MaskIDs.STATUS_TYPING,
-        );
-        masks[StreamingStatusMask] = (
-          <FluentMasks.typing id={Modules.MaskManager.MaskIDs.STATUS_TYPING} />
-        );
-      }
+      for (const replacement of replacements)
+        Utils.replaceMask({ ...replacement, masks: res.props.children });
       return res;
     },
   );

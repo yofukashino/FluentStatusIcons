@@ -1,31 +1,38 @@
-import { ReactDOM } from "replugged/common";
-import { PluginLogger } from "../index";
-import Modules from "./requiredModules";
+import { util } from "replugged";
+import { PluginInjector, PluginLogger } from "../index";
+
+export const replaceMask = ({
+  predicate,
+  id,
+  element,
+  masks,
+}: {
+  predicate: boolean;
+  id: string;
+  element: React.ReactElement;
+  masks: React.ReactElement[];
+}) => {
+  if (!predicate) return;
+  const index = masks.findIndex((mask: React.ReactElement) => mask.props.id === id);
+  masks[index] = element;
+};
 
 export const refreshMaskLibrary = (): void => {
   try {
-    if (!Modules?.MaskManager) {
-      PluginLogger.error("Missing “MaskManager” module, Please report this to the developer.");
+    const element = document.querySelector("#app-mount #svg-mask-squircle");
+    if (!element) {
+      PluginLogger.error("Missing “MaskManager” element, Please report this to the developer.");
       return;
     }
-    const {
-      MaskManager: { MaskLibrary },
-    } = Modules;
-    const TempMaskContainer = document.createElement("div");
-    TempMaskContainer.style.display = "none";
-    document.body.appendChild(TempMaskContainer);
-
-    ReactDOM.render(<MaskLibrary />, TempMaskContainer);
-
-    const MaskLibraryElement = document.querySelector("#app-mount #svg-mask-squircle")
-      ?.parentNode as HTMLElement;
-    if (MaskLibraryElement) {
-      MaskLibraryElement.innerHTML = TempMaskContainer.firstElementChild.innerHTML;
-      TempMaskContainer.remove();
-    }
+    const ownerInstance = util.getOwnerInstance(element);
+    const unpatchRender = PluginInjector.instead(ownerInstance, "render", () => {
+      unpatchRender();
+      return null;
+    });
+    ownerInstance.forceUpdate(ownerInstance.forceUpdate);
   } catch (error) {
     PluginLogger.error(error);
   }
 };
 
-export default { refreshMaskLibrary };
+export default { replaceMask, refreshMaskLibrary };
